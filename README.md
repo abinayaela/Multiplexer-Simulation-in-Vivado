@@ -1,11 +1,11 @@
 SIMULATION AND IMPLEMENTATION OF LOGIC GATES
-AIM:
+## AIM:##
 To design and simulate a 4:1 Multiplexer (MUX) using Verilog HDL in four different modeling styles—Gate-Level, Data Flow, Behavioral, and Structural—and to verify its functionality through a testbench using the Vivado 2023.1 simulation environment. The experiment aims to understand how different abstraction levels in Verilog can be used to describe the same digital logic circuit and analyze their performance.
 
-APPARATUS REQUIRED:
+## APPARATUS REQUIRED: ##
 Vivado 2023.1
 
-Procedure
+## Procedure ##
 1. Launch Vivado
 Open Vivado 2023.1 by double-clicking the Vivado icon or searching for it in the Start menu.
 2. Create a New Project
@@ -51,17 +51,18 @@ You can include the timing diagram from the simulation window showing the correc
 10. Close the Simulation
 Once done, close the simulation by going to Simulation → "Close Simulation".
 
-Logic Diagram
+## Logic Diagram ##
 
 ![image](https://github.com/user-attachments/assets/d4ab4bc3-12b0-44dc-8edb-9d586d8ba856)
 
-Truth Table
+## Truth Table ##
 
 ![image](https://github.com/user-attachments/assets/c850506c-3f6e-4d6b-8574-939a914b2a5f)
 
-Verilog Code
+## Verilog Code ##
 
-4:1 MUX Gate-Level Implementation
+ ## 4:1 MUX Gate-Level Implementation ##
+ 
  module multiplexer(s1,s0,a,b,c,d,y);
 input s1,s0,a,b,c,d;
 output y;
@@ -72,10 +73,11 @@ and g3(w[2],s1,~s0,c);
 and g4(w[3],s1,s0,d);
 or g5(y,w[0],w[1],w[2],w[3]);
 endmodule
+
  ## output ##
  ![image](https://github.com/user-attachments/assets/d8d01408-2d41-4b7c-83f0-5d3627df65ca)
 
-4:1 MUX Data Flow Implementation
+## 4:1 MUX Data Flow Implementation ##
 
 module mul_data( Y,I0,I1,I2,I3,S0,S1);
 output Y;       
@@ -91,7 +93,7 @@ endmodule
 ![image](https://github.com/user-attachments/assets/1e221ec4-b0be-4c72-9f79-42d143a147d3)
 
 
-4:1 MUX Behavioral Implementation
+ ## 4:1 MUX Behavioral Implementation ##
 
 module mux(s, i, y);
 input [1:0] s;
@@ -112,7 +114,7 @@ endmodule
 ![image](https://github.com/user-attachments/assets/a5ba5fdb-2066-4144-b75e-7f786cf45c30)
 
 
-4:1 MUX Structural Implementation
+## 4:1 MUX Structural Implementation ##
 
 module mux_4to1 (a,b,c,d,S0,S1,Y);
 input a,b,c,d;
@@ -126,7 +128,7 @@ endmodule
 ## output ##
 ![image](https://github.com/user-attachments/assets/b2829992-1bb2-4338-9d22-695b5b153133)
 
-Testbench Implementation
+ ## Testbench Implementation ## 
 
 // mux4_to_1_tb.v
 `timescale 1ns / 1ps
