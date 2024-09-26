@@ -1,5 +1,5 @@
 SIMULATION AND IMPLEMENTATION OF LOGIC GATES
-## AIM:##
+## AIM: ##
 To design and simulate a 4:1 Multiplexer (MUX) using Verilog HDL in four different modeling styles—Gate-Level, Data Flow, Behavioral, and Structural—and to verify its functionality through a testbench using the Vivado 2023.1 simulation environment. The experiment aims to understand how different abstraction levels in Verilog can be used to describe the same digital logic circuit and analyze their performance.
 
 ## APPARATUS REQUIRED: ##
@@ -64,14 +64,23 @@ Once done, close the simulation by going to Simulation → "Close Simulation".
  ## 4:1 MUX Gate-Level Implementation ##
  
  module multiplexer(s1,s0,a,b,c,d,y);
+ 
 input s1,s0,a,b,c,d;
+
 output y;
+
 wire[3:0]w;
+
 and g1(w[0],~s1,~s0,a);
+
 and g2(w[1],~s1,s0,b);
+
 and g3(w[2],s1,~s0,c);
+
 and g4(w[3],s1,s0,d);
+
 or g5(y,w[0],w[1],w[2],w[3]);
+
 endmodule
 
  ## output ##
@@ -80,14 +89,19 @@ endmodule
 ## 4:1 MUX Data Flow Implementation ##
 
 module mul_data( Y,I0,I1,I2,I3,S0,S1);
-output Y;       
+
+output Y;      
+
 input I0, I1, I2, I3;
+
 input S0, S1;     
-assign Y = (~S1 & ~S0 & I0) |  
-          (~S1 & S0 & I1)  |  
-           (S1 & ~S0 & I2)  |  
-           (S1 & S0 & I3);
-endmodule
+
+assign Y = (~S1 & ~S0 & I0)|  
+          (~S1 & S0 & I1) | 
+           (S1 & ~S0 & I2) |
+           (S1 & S0 & I3) |
+           
+   endmodule
 
 ## output ##
 ![image](https://github.com/user-attachments/assets/1e221ec4-b0be-4c72-9f79-42d143a147d3)
@@ -102,33 +116,41 @@ output reg y;
 always @(s or i)  
 begin
  case (s)
-        2'b00: y = i[0];  
-        2'b01: y = i[1];   
-        2'b10: y = i[2];
-        2'b11: y = i[3];  
-        default: y = 1'b0;
-    endcase
+  2'b00: y = i[0];  
+  2'b01: y = i[1];   
+  2'b10: y = i[2];
+  2'b11: y = i[3];  
+ default: y = 1'b0;
+ 
+endcase
+
 end
+
 endmodule
 ## output ##
 ![image](https://github.com/user-attachments/assets/a5ba5fdb-2066-4144-b75e-7f786cf45c30)
 
 
-## 4:1 MUX Structural Implementation ##
+## 4:1 MUX Structural Implementation 
 
 module mux_4to1 (a,b,c,d,S0,S1,Y);
+
 input a,b,c,d;
-input  S0, S1;       
-output  Y ;          
+
+input  S0, S1;  
+
+output  Y ;    
+
 assign Y = (S1 == 0 && S0 == 0) ? a :
  (S1 == 0 && S0 == 1) ? b :
 (S1 == 1 && S0 == 0) ? c :
 (S1 == 1 && S0 == 1) ? d:
+
 endmodule
-## output ##
+## output 
 ![image](https://github.com/user-attachments/assets/b2829992-1bb2-4338-9d22-695b5b153133)
 
- ## Testbench Implementation ## 
+ ## Testbench Implementation 
 
 // mux4_to_1_tb.v
 `timescale 1ns / 1ps
